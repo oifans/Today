@@ -3,8 +3,11 @@ package com.lb.today.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.lb.today.AppConfig;
 import com.lb.today.R;
 import com.lb.today.util.SystemBarTintManager;
+
+import cn.bmob.v3.Bmob;
 
 /**
  * Created by lb on 16-1-17.
@@ -13,6 +16,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //初始化Bmob
+        Bmob.initialize(this, AppConfig.BmobApplicationId);
         init();
     }
 
