@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.lb.today.ui.AddEventActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar"></include>
+    </LinearLayout>
+
+    <DatePicker
+        android:id="@+id/dp_addevent_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_toolbar"
+        android:calendarViewShown="false"></DatePicker>
+
+    <EditText
+        android:id="@+id/et_addevent_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dp_addevent_date"
+        android:hint="标题" />
+
+
+    <EditText
+        android:id="@+id/et_addevent_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_addevent_title"
+        android:hint="内容" />
+    <Button
+        android:id="@+id/bt_addevent_add"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/et_addevent_content"
+        android:layout_centerHorizontal="true"
+        android:text="提交"
+        />
+</RelativeLayout>

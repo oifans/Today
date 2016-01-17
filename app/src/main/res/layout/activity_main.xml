@@ -30,6 +30,7 @@
         android:layout_below="@id/tv_main_date"></ListView>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_main_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

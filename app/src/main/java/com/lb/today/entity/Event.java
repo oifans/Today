@@ -6,7 +6,7 @@ import cn.bmob.v3.BmobObject;
  * Created by lb on 16-1-17.
  * 一天的实体类
  */
-public class OneDay extends BmobObject{
+public class Event extends BmobObject{
 
     private String title;   //标题
     private String content; //详细内容
