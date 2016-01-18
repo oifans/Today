@@ -3,6 +3,7 @@ package com.lb.today.util;
 import android.content.Context;
 import android.content.Intent;
 
+import com.lb.today.ui.AddEventActivity;
 import com.lb.today.ui.MainActivity;
 
 /**
@@ -11,9 +12,14 @@ import com.lb.today.ui.MainActivity;
 public class NavigationUtil {
     /**
      * 打开首页
+     *
      * @param context
      */
-    public static void ToMain(Context context){
+    public static void toMain(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
+    }
+
+    public static void toAddEvent(Context context) {
+        context.startActivity(new Intent(context, AddEventActivity.class));
     }
 }

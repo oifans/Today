@@ -24,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void init() {
         setContentView();
         findViews();
+        setTransparentStatus();
         getData();
         showContent();
     }

@@ -29,7 +29,7 @@ public class EventModel {
             @Override
             public void onSuccess() {
                 Toast.makeText(context, context.getString(R.string.add_success), Toast.LENGTH_SHORT).show();
-                NavigationUtil.ToMain(context);
+                NavigationUtil.toMain(context);
                 if(context instanceof Activity){
                     ((Activity) context).finish();
                 }
