@@ -8,8 +8,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lb.today.R;
+import com.lb.today.adapter.EventsAdapter;
+import com.lb.today.entity.Event;
+import com.lb.today.model.EventModel;
 import com.lb.today.util.NavigationUtil;
 import com.lb.today.util.TimeUtil;
+
+import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
 
@@ -17,6 +22,10 @@ public class MainActivity extends BaseActivity {
     private ListView mLvData;
     private TextView mTvDate;
     private FloatingActionButton mFabAdd;
+
+    private int year;
+    private int month;
+    private int day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +56,16 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void getData() {
+        year = TimeUtil.getYear();
+        month = TimeUtil.getMonth();
+        day = TimeUtil.getDay();
 
+        ArrayList<Event> events = (ArrayList<Event>) EventModel.findByDateInSqlite(this,month,day);
+        mLvData.setAdapter(new EventsAdapter(this,events ));
     }
 
     @Override
     public void showContent() {
-        mTvDate.setText("那年的" + TimeUtil.getMonth() + getString(R.string.month) + TimeUtil.getDay() + getString(R.string.day));
+        mTvDate.setText("那年的" + month + getString(R.string.month) + day + getString(R.string.day));
     }
 }

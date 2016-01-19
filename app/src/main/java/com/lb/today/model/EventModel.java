@@ -2,11 +2,17 @@ package com.lb.today.model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.lb.today.R;
 import com.lb.today.entity.Event;
 import com.lb.today.util.NavigationUtil;
+import com.lb.today.util.TimeUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
@@ -24,13 +30,13 @@ public class EventModel {
      *
      * @param event
      */
-    public static void addEvent(final Context context , Event event) {
+    public static void addEvent(final Context context, Event event) {
         event.save(context, new SaveListener() {
             @Override
             public void onSuccess() {
                 Toast.makeText(context, context.getString(R.string.add_success), Toast.LENGTH_SHORT).show();
                 NavigationUtil.toMain(context);
-                if(context instanceof Activity){
+                if (context instanceof Activity) {
                     ((Activity) context).finish();
                 }
             }
@@ -50,7 +56,7 @@ public class EventModel {
      * @param month
      * @param day
      */
-    public static void findByDate(final Context context,int year, int month, int day, FindListener<Event> listener) {
+    public static void findByDate(final Context context, int year, int month, int day, FindListener<Event> listener) {
         BmobQuery<Event> query = new BmobQuery<Event>();
         query.addWhereEqualTo("year", year);
         query.addWhereEqualTo("month", month);
@@ -65,7 +71,7 @@ public class EventModel {
      * @param month
      * @param day
      */
-    public static void findByDate(final Context context,int month, int day, FindListener<Event> listener) {
+    public static void findByDate(final Context context, int month, int day, FindListener<Event> listener) {
         BmobQuery<Event> query = new BmobQuery<Event>();
         query.addWhereEqualTo("month", month);
         query.addWhereEqualTo("day", day);
@@ -73,4 +79,23 @@ public class EventModel {
         query.findObjects(context, listener);
     }
 
+
+    /**
+     * 本地找出月日的数据
+     *
+     * @return
+     */
+    public static List<Event> findByDateInSqlite(Context context, int month, int day) {
+        List<Event> events = new ArrayList<Event>();
+        SQLiteDatabase db = context.openOrCreateDatabase("history1.db", Context.MODE_PRIVATE, null);
+        String sql = "SELECT * FROM history where month=" + TimeUtil.getMonth() + " and day=" + TimeUtil.getDay();
+        Cursor c = db.rawQuery(sql, null);
+        while (c.moveToNext()) {
+            Event event = new Event();
+            event.setTitle(c.getString(c.getColumnIndex("title")));
+            event.setYear(c.getInt(c.getColumnIndex("year")));
+            events.add(event);
+        }
+        return events;
+    }
 }

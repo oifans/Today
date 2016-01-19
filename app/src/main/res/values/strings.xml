@@ -7,4 +7,6 @@
     <string name="year">年</string>
     <string name="month">月</string>
     <string name="day">日</string>
+    <string name="title_activity_event_detial">EventDetialActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>
